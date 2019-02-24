@@ -12,7 +12,19 @@ services:
         - reverse-proxy
     image: coffee-challenge
     ports:
-        - "3000:3000"
+        - "3001:3000"
     volumes:
         - ../coffee-challenge:/usr/src/app
+    restart: always
+
+  pocket-stats:
+    env_file:
+        - pocket-stats.env
+    depends_on:
+        - reverse-proxy
+    image: pocket-stats
+    ports:
+        - "3002:3000"
+    volumes:
+        - ../pocket-stats:/usr/src/app
     restart: always
